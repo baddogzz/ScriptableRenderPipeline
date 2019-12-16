@@ -7,7 +7,7 @@
 CTYPE Sample(TEXTURE2D_X_PARAM(_InputTexture, _InputTextureSampler), float2 UV)
 {
     float2 ScaledUV = ClampAndScaleUVForPoint(UV);
-    return SAMPLE_COLOR_LOD(_InputTexture, _InputTextureSampler, ScaledUV, 0);
+    return SAMPLE_CTYPE_LOD(_InputTexture, _InputTextureSampler, ScaledUV, 0);
 }
 
 CTYPE Nearest(TEXTURE2D_X(_InputTexture), float2 UV)

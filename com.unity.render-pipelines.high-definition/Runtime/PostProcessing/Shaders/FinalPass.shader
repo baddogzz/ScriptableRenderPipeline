@@ -90,7 +90,7 @@ Shader "Hidden/HDRP/FinalPass"
             #if defined(BILINEAR) || defined(CATMULL_ROM_4) || defined(LANCZOS)
             CTYPE outColor = UpscaledResult(positionNDC.xy);
             #else
-            CTYPE outColor = LOAD_COLOR(_InputTexture, positionSS);
+            CTYPE outColor = LOAD_CTYPE(_InputTexture, positionSS);
             #endif
 
             #if !defined(HAS_ALPHA)

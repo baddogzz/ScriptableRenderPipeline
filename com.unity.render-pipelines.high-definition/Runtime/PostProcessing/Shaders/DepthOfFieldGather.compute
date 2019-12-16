@@ -131,7 +131,7 @@ void MAIN(uint3 dispatchThreadId : SV_DispatchThreadID)
         sampTap = sampTap * sampDist * clipping + uv;
         sampTap = ClampAndScaleUV(sampTap, _TexelSize.zw, texelsToClamp);
 
-        CTYPE sampColor = SAMPLE_COLOR_LOD(_InputTexture, SamplerTap, sampTap, mip);
+        CTYPE sampColor = SAMPLE_CTYPE_LOD(_InputTexture, SamplerTap, sampTap, mip);
         float sampCoC = SAMPLE_TEXTURE2D_X_LOD(_InputCoCTexture, SamplerTap, sampTap, mip).x;
 
     #ifdef HAS_ALPHA

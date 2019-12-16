@@ -51,7 +51,7 @@ void MAIN(uint3 dispatchThreadId : SV_DispatchThreadID)
 
 #if FULL_RES
 
-    CTYPE tapColor = LOAD_COLOR(_InputTexture, posInputs.positionSS);
+    CTYPE tapColor = LOAD_CTYPE(_InputTexture, posInputs.positionSS);
     float tapCoC = LOAD_TEXTURE2D_X(_InputCoCTexture, posInputs.positionSS).x;
 
     float nearCoC = saturate(abs(min(tapCoC, 0.0)));
@@ -94,7 +94,7 @@ void MAIN(uint3 dispatchThreadId : SV_DispatchThreadID)
     {
         float2 tapCoord = texelSize * kTaps[i] + uv;
 
-        CTYPE tapColor = SAMPLE_COLOR_LOD(_InputTexture, sampler_LinearClamp, ClampAndScaleUVForBilinear(tapCoord, texelSize), 0.0);
+        CTYPE tapColor = SAMPLE_CTYPE_LOD(_InputTexture, sampler_LinearClamp, ClampAndScaleUVForBilinear(tapCoord, texelSize), 0.0);
         float tapCoC = SAMPLE_TEXTURE2D_X_LOD(_InputCoCTexture, sampler_LinearClamp, min(tapCoord * _CoCTargetScale.xy, maxCoordCoC), 0.0).x;
 
         float nearCoC = saturate(abs(min(tapCoC, 0.0)));

@@ -159,7 +159,7 @@ void MAIN(uint3 dispatchThreadId : SV_DispatchThreadID)
     }
     else
     {
-        color = SAMPLE_COLOR_LOD(_InputTexture, sampler_LinearClamp, ClampAndScaleUVForBilinear(uvDistorted), 0.0);
+        color = SAMPLE_CTYPE_LOD(_InputTexture, sampler_LinearClamp, ClampAndScaleUVForBilinear(uvDistorted), 0.0);
         inputColor = color;
     }
 
@@ -173,7 +173,7 @@ void MAIN(uint3 dispatchThreadId : SV_DispatchThreadID)
         float3 bloom = SampleTexture2DBicubic(TEXTURE2D_X_ARGS(_BloomTexture, sampler_LinearClamp), uvDistorted * _RTHandleScale.xy, _BloomBicubicParams, _RTHandleScale.xy, unity_StereoEyeIndex).xyz;
         #endif
 
-        float3 thresholdedColor = QuadraticThreshold(color, _BloomThreshold.x, _BloomThreshold.yzw);
+        float3 thresholdedColor = QuadraticThreshold(color.xyz, _BloomThreshold.x, _BloomThreshold.yzw);
         color.xyz = lerp(color.xyz, (color.xyz - thresholdedColor) + (bloom * BloomTint), BloomIntensity);
 
         UNITY_BRANCH
